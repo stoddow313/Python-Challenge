@@ -3,12 +3,15 @@
 import os 
 import csv
 import collections
-from collections import Counter
+
 
 # Define variables 
 
-voters_candidates = []
-voters_per_candidate = []
+total_votes = []
+votes_per_candidate = ()
+output = '''Election Results
+-------------------------
+Total Votes: '''
 
 # Path to data file 
 
@@ -21,46 +24,26 @@ with open(election_data) as csvfile:
     csv_header = next(csvfile)
 
     for row in csv_reader:
+    
+        total_votes.append(row[2])
 
-        voters_candidates.append(row[2])
+total_count = len(total_votes)
+output = output + str(total_count) + "\n" + "-----------------" + "\n"
+candidates = list(set(total_votes))
+votes_per_candidate = []
+percentage = []
 
-    sorted_list = sorted(voters_candidates)
+for candidate in candidates:
+    votes_per_candidate.append(total_votes.count(candidate))
 
-    arrange_list = sorted_list
+for i in range(len(candidates)):
+    percentage = votes_per_candidate[i]/total_count*100
+    output = output + f'{candidates[i]}: {round(percentage, 3)}% ({votes_per_candidate[i]}) \n'
 
-    count_candidate = Counter(arrange_list)
-    voters_per_candidate.append(count_candidate.most_common())
+winner_index = votes_per_candidate.index(max(votes_per_candidate))
+output = output + f"--------------------\nWinner: {candidates[winner_index]}\n----------------"
 
-    for item in voters_per_candidate:
-
-        first = format((item[0][1])*100/(sum(count_candidate.values())), '.3f')
-        second = format((item[1][1]*100)/(sum(count_candidate.values())), '.3f')
-        third = format((item[2][1]*100)/(sum(count_candidate.values())), '.3f')
-
-#Print analysis to terminal
-
-print("Election Results")
-print("-----------------")
-print(f"Total Votes: {sum(count_candidate.values())}")
-print("-----------------")
-print(f"{voters_candidates[0][0][0]}: {first}% ({voters_per_candidate[0][0][1]})")
-print(f"{voters_candidates[0][1][0]}: {second}% ({voters_per_candidate[0][1][1]})")
-print(f"{voters_candidates[0][2][0]}: {third}% ({voters_per_candidate[0][2][1]})")
-print("-----------------")
-print(f"Winner: {voters_per_candidate[0][0][0]}")
-print("-----------------")
-
-# Export text file with results
-election_file = os.path.join(r"C:\Users\wstod\OneDrive\Desktop\Python-Challenge\PyPoll\Analysis\analysis.txt")
-with open(election_file, "w") as outfile:
-
-    outfile.write("Election Results\n")
-    outfile.write("-----------------\n")
-    outfile.write(f"Total Votes: {sum(count_candidate.values())}\n")
-    outfile.write("-----------------\n")
-    outfile.write(f"{voters_candidates[0][0][0]}: {first}% ({voters_per_candidate[0][0][1]})\n")
-    outfile.write(f"{voters_candidates[0][1][0]}: {second}% ({voters_per_candidate[0][1][1]})\n")
-    outfile.write(f"{voters_candidates[0][2][0]}: {third}% ({voters_per_candidate[0][2][1]})\n")
-    outfile.write("-----------------\n")
-    outfile.write(f"Winner: {voters_per_candidate[0][0][0]}\n")
-    outfile.write("-----------------\n")
+print(output)
+csvpath = os.path.join("..",r"C:\Users\wstod\OneDrive\Desktop\Python-Challenge\PyPoll\Analysis\analysis.txt")
+with open(csvpath, 'w') as textfile:
+    textfile.write(output)
