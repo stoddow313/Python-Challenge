@@ -27,6 +27,7 @@ with open(election_data) as csvfile:
     
         total_votes.append(row[2])
 
+# Calculate total votes, candidate votes, and percentage
 total_count = len(total_votes)
 output = output + str(total_count) + "\n" + "-----------------" + "\n"
 candidates = list(set(total_votes))
@@ -40,6 +41,7 @@ for i in range(len(candidates)):
     percentage = votes_per_candidate[i]/total_count*100
     output = output + f'{candidates[i]}: {round(percentage, 3)}% ({votes_per_candidate[i]}) \n'
 
+# Find winner, and print results 
 winner_index = votes_per_candidate.index(max(votes_per_candidate))
 output = output + f"--------------------\nWinner: {candidates[winner_index]}\n----------------"
 

@@ -40,6 +40,7 @@ with open(budget_data_csv) as csvfile:
 
             previous_profit_loss = current_profit_loss
     
+    # Calculate net total profit loss, average change, greatest and smallest change, best/worst month.
     sum_profit_loss = sum(profit_loss_changes)
     average_profit_loss = round(sum_profit_loss/(count_months - 1), 2)
 
