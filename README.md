@@ -22,6 +22,6 @@ This script was similar but had a few more things to work out for me. I import t
 
 [analysis.txt](https://github.com/stoddow313/Python-Challenge/files/11944156/analysis.txt)
 
-I did have some help from google and the slides provided by Thomas Tellner and the UO Data Analytics Bootcamp in learning how to read files in, and write them out as well as learning some functions to make this smooth. 
-
 ![image](https://github.com/stoddow313/Python-Challenge/assets/134353666/3d55459d-b929-4d08-9266-c40dce2e1b04)
+
+I did have some help from google and the slides provided by Thomas Tellner and the UO Data Analytics Bootcamp in learning how to read files in, and write them out as well as learning some functions to make this smooth. 
